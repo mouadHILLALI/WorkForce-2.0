@@ -7,7 +7,7 @@ public class EmployeeDTOMapper {
 
     public EmployeeDTOMapper() {}
 
-    public Employee DtoToEmployee(EmployeeDTO employeeDTO) {
+    public static Employee DtoToEmployee(EmployeeDTO employeeDTO) {
         try {
             Employee employee = new Employee();
             employee.setId(employeeDTO.getId());
@@ -27,7 +27,7 @@ public class EmployeeDTOMapper {
         }
     }
 
-    public EmployeeDTO EmployeeToDto(Employee employee) {
+    public static EmployeeDTO EmployeeToDto(Employee employee) {
         try {
             EmployeeDTO employeeDTO = new EmployeeDTO();
             employeeDTO.setId(employee.getId());
