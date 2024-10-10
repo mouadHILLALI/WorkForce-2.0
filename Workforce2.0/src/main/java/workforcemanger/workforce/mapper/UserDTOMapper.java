@@ -6,29 +6,22 @@ import workforcemanger.workforce.entity.User;
 public class UserDTOMapper {
     public UserDTOMapper(){}
 
-    public User DtoToUser(UserDTO userDTO){
+    public User DtoToUser(UserDTO userDTO) {
         try {
-            User user = new User();
-            user.setId(userDTO.getId());
-            user.setUserName(userDTO.getUserName());
-            user.setEmail(userDTO.getEmail());
-            user.setPassword(userDTO.getPassword());
-            user.setRole(userDTO.getRole());
-            user.setPhone(userDTO.getPhone());
+            User user = new User(
+                    userDTO.getId(), userDTO.getUserName(), userDTO.getPassword(), userDTO.getEmail(), userDTO.getPhone(), userDTO.getRole()
+            );
             return user;
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Error mapping UserDTO to User", e);
         }
     }
+
     public UserDTO UserToDto(User user) {
         try {
-            UserDTO userDTO = new UserDTO();
-            userDTO.setId(user.getId());
-            userDTO.setUserName(user.getUserName());
-            userDTO.setEmail(user.getEmail());
-            userDTO.setPassword(user.getPassword());
-            userDTO.setRole(user.getRole());
-            userDTO.setPhone(user.getPhone());
+            UserDTO userDTO = new UserDTO(
+                    user.getId(),  user.getUserName(), user.getEmail(), user.getRole(), user.getPhone(), user.getPassword()
+            );
             return userDTO;
         } catch (Exception e) {
             throw new RuntimeException("Error mapping User to UserDTO", e);
