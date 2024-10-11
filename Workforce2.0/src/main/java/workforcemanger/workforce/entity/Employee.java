@@ -46,6 +46,20 @@ public class Employee {
     private String socialSecurityNumber;
 
     public Employee() {}
+    public Employee( int id , String userName , String email , String role , String phone , LocalDate dateOfBirth , String address , String position , LocalDate hireDate , Double salary , int childrenCount , String socialSecurityNumber) {
+        this.id = id;
+        this.userName = userName;
+        this.email = email;
+        this.role = "employee";
+        this.phone = phone;
+        this.dateOfBirth = dateOfBirth;
+        this.address = address;
+        this.position = position;
+        this.hireDate = hireDate;
+        this.salary = salary;
+        this.childrenCount = childrenCount;
+        this.socialSecurityNumber = socialSecurityNumber;
+    }
     public Employee(String userName , String email , String role , String phone , LocalDate dateOfBirth , String address , String position , LocalDate hireDate , Double salary , int childrenCount , String socialSecurityNumber) {
         this.userName = userName;
         this.email = email;

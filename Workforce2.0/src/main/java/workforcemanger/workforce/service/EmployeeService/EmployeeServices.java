@@ -46,4 +46,12 @@ public class EmployeeServices {
             throw new RuntimeException(e);
         }
     }
+    public boolean delete(int id){
+        try {
+            return employeeRepository.delete(id);
+        }catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

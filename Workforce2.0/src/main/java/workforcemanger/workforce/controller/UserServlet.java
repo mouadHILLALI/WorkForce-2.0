@@ -60,7 +60,7 @@ public class UserServlet extends HttpServlet {
     public void logout(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             req.getSession().invalidate();
-            RequestDispatcher rd = req.getRequestDispatcher("/views/login.jsp");
+            RequestDispatcher rd = req.getRequestDispatcher("/views/Auth/login.jsp");
             rd.forward(req, resp);
         } catch (Exception e) {
             throw new RuntimeException(e);

@@ -24,6 +24,7 @@ public class EmployeeServlet extends HttpServlet {
                 getEmployee(req, resp);
                 break;
             case "delete":
+                delete(req, resp);
                 break;
         }
     }
@@ -83,19 +84,33 @@ public class EmployeeServlet extends HttpServlet {
             Double salary = Double.parseDouble(req.getParameter("salary"));
             int childrenCount = Integer.parseInt(req.getParameter("childrenCount"));
             String socialSecurityNumber = req.getParameter("socialSecurityNumber");
-            String phoneNumber = req.getParameter("phoneNumber");
-            LocalDate dateOfBirth = LocalDate.parse(req.getParameter("dateOfBirth"));
+            String phoneNumber = req.getParameter("phone");
+            LocalDate dateOfBirth = LocalDate.parse(req.getParameter("birthDate"));
             EmployeeDTO employeeDTO = new EmployeeDTO(
                     id, userName, email, address, position,
                     hireDate, salary, childrenCount, socialSecurityNumber, phoneNumber, dateOfBirth
             );
             employeeDTO = employeeServices.update(employeeDTO);
             req.getSession().setAttribute("employee", employeeDTO);
-            RequestDispatcher rq = req.getRequestDispatcher("/views/admin/adminEmployeeManagement.jsp");
+            RequestDispatcher rq = req.getRequestDispatcher("/views/admin/adminEmployeManagement.jsp");
             rq.forward(req, resp);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
-
+    public void delete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        try {
+            int id = Integer.parseInt(req.getParameter("id"));
+            boolean deleted = employeeServices.delete(id);
+            if (deleted) {
+                req.getSession().setAttribute("message", "Employee deleted successfully");
+            }else {
+                req.getSession().setAttribute("message", "Employee not deleted successfully");
+            }
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/views/admin/adminEmployeManagement.jsp");
+            dispatcher.forward(req, resp);
+        }catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

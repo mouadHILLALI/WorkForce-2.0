@@ -14,6 +14,7 @@ public class EmployeeDTOMapper {
         Employee employee = null ;
         try {
             return employee = new Employee(
+                    employeeDTO.getId(),
                 employeeDTO.getUserName() , employeeDTO.getEmail() , "employee" , employeeDTO.getPhoneNumber() , employeeDTO.getDateOfBirth(),
                 employeeDTO.getAddress(), employeeDTO.getPosition(), employeeDTO.getHireDate(), employeeDTO.getSalary(), employeeDTO.getChildrenCount(),
                     employeeDTO.getSocialSecurityNumber()
