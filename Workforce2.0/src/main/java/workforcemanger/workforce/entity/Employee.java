@@ -1,13 +1,26 @@
 package workforcemanger.workforce.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Column;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "employees")
-public class Employee extends User {
+public class Employee {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private int id;
+    @Column(name = "username")
+    private String userName;
+
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "role")
+    private String role;
+
+    @Column(name = "phone")
+    private String phone;
 
     @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
@@ -31,55 +44,57 @@ public class Employee extends User {
     private String socialSecurityNumber;
 
     public Employee() {}
-
-    @Override
+    public Employee(String userName , String email , String role , String phone , LocalDate dateOfBirth , String address , String position , LocalDate hireDate , Double salary , int childrenCount , String socialSecurityNumber) {
+        this.userName = userName;
+        this.email = email;
+        this.role = "employee";
+        this.phone = phone;
+        this.dateOfBirth = dateOfBirth;
+        this.address = address;
+        this.position = position;
+        this.hireDate = hireDate;
+        this.salary = salary;
+        this.childrenCount = childrenCount;
+        this.socialSecurityNumber = socialSecurityNumber;
+    }
     public int getId() {
-        return super.getId();
+        return id;
     }
 
-    @Override
     public void setId(int id) {
-        super.setId(id);
+        this.id = id;
     }
 
-    @Override
     public String getUserName() {
-        return super.getUserName();
+        return userName;
     }
 
-    @Override
-    public void setUserName(String username) {
-        super.setUserName(username);
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    @Override
     public String getEmail() {
-        return super.getEmail();
+        return email;
     }
 
-    @Override
     public void setEmail(String email) {
-        super.setEmail(email);
+        this.email = email;
     }
 
-    @Override
     public String getRole() {
-        return super.getRole();
+        return role;
     }
 
-    @Override
     public void setRole(String role) {
-        super.setRole(role);
+        this.role = role;
     }
 
-    @Override
     public String getPhone() {
-        return super.getPhone();
+        return phone;
     }
 
-    @Override
     public void setPhone(String phone) {
-        super.setPhone(phone);
+        this.phone = phone;
     }
 
     public LocalDate getDateOfBirth() {
@@ -141,11 +156,11 @@ public class Employee extends User {
     @Override
     public String toString() {
         return "Employee{" +
-                "id=" + getId() +
-                ", username='" + getUserName() + '\'' +
-                ", email='" + getEmail() + '\'' +
-                ", role='" + getRole() + '\'' +
-                ", phone='" + getPhone() + '\'' +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
+                ", email='" + email + '\'' +
+                ", role='" + role + '\'' +
+                ", phone='" + phone + '\'' +
                 ", dateOfBirth=" + dateOfBirth +
                 ", address='" + address + '\'' +
                 ", position='" + position + '\'' +

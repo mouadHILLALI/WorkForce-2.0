@@ -1,6 +1,8 @@
 package workforcemanger.workforce.controller;
 
+import workforcemanger.workforce.dto.EmployeeDTO;
 import workforcemanger.workforce.dto.UserDTO;
+import workforcemanger.workforce.service.EmployeeService.EmployeeServices;
 import workforcemanger.workforce.service.UserService.UserService;
 
 import javax.servlet.RequestDispatcher;
@@ -10,10 +12,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name = "user" , value = "/user")
 public class UserServlet extends HttpServlet {
     final UserService userService = new UserService();
+    final EmployeeServices employeeService = new EmployeeServices();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     String action = req.getParameter("action");
@@ -21,7 +25,11 @@ public class UserServlet extends HttpServlet {
         case "logout":
             logout(req, resp);
             break;
-    }
+        case "getAll":
+            getAllInfo(req, resp);
+        default:
+            break;
+     }
     }
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
@@ -73,7 +81,7 @@ public class UserServlet extends HttpServlet {
                         targetPage = "/views/candidate.jsp";
                         break;
                     case "admin":
-                        targetPage = "/views/admin.jsp";
+                        targetPage = "/views/admin.jsp?action=";
                         break;
                     default:
                         targetPage = "/views/login.jsp";
@@ -93,5 +101,14 @@ public class UserServlet extends HttpServlet {
             rd.forward(req, resp);
         }
     }
-
+    public void getAllInfo(HttpServletRequest req , HttpServletResponse res) throws ServletException , IOException {
+        try {
+            List<EmployeeDTO> employeeDTOS = employeeService.getAllEmployees();
+            req.setAttribute("employeeDTOS", employeeDTOS);
+            RequestDispatcher rd = req.getRequestDispatcher("/views/adminEmployeManagement.jsp");
+            rd.forward(req, res);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

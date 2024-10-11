@@ -15,12 +15,24 @@ public class EmployeeDTO {
     private String socialSecurityNumber;
     private String phoneNumber;
     private LocalDate dateOfBirth;
-
     public EmployeeDTO() {}
 
     public EmployeeDTO(int id, String userName, String email, String address, String position,
-                       LocalDate hireDate, Double salary, int childrenCount, String socialSecurityNumber, String phoneNumber , LocalDate dateOfBirth) {
+                       LocalDate hireDate, Double salary, int childrenCount, String socialSecurityNumber, String phoneNumber, LocalDate dateOfBirth) {
         this.id = id;
+        this.userName = userName;
+        this.email = email;
+        this.address = address;
+        this.position = position;
+        this.hireDate = hireDate;
+        this.salary = salary;
+        this.childrenCount = childrenCount;
+        this.socialSecurityNumber = socialSecurityNumber;
+        this.phoneNumber = phoneNumber;
+        this.dateOfBirth = dateOfBirth;
+    }
+    public EmployeeDTO( String userName, String email, String address, String position,
+                       LocalDate hireDate, Double salary, int childrenCount, String socialSecurityNumber, String phoneNumber , LocalDate dateOfBirth) {
         this.userName = userName;
         this.email = email;
         this.address = address;

@@ -3,47 +3,47 @@ package workforcemanger.workforce.mapper;
 import workforcemanger.workforce.dto.EmployeeDTO;
 import workforcemanger.workforce.entity.Employee;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class EmployeeDTOMapper {
 
     public EmployeeDTOMapper() {}
 
     public static Employee DtoToEmployee(EmployeeDTO employeeDTO) {
+        Employee employee = null ;
         try {
-            Employee employee = new Employee();
-            employee.setId(employeeDTO.getId());
-            employee.setUserName(employeeDTO.getUserName());
-            employee.setEmail(employeeDTO.getEmail());
-            employee.setPhone(employeeDTO.getPhoneNumber());
-            employee.setDateOfBirth(employeeDTO.getDateOfBirth());
-            employee.setAddress(employeeDTO.getAddress());
-            employee.setPosition(employeeDTO.getPosition());
-            employee.setHireDate(employeeDTO.getHireDate());
-            employee.setSalary(employeeDTO.getSalary());
-            employee.setChildrenCount(employeeDTO.getChildrenCount());
-            employee.setSocialSecurityNumber(employeeDTO.getSocialSecurityNumber());
-            return employee;
+            return employee = new Employee(
+                employeeDTO.getUserName() , employeeDTO.getEmail() , "employee" , employeeDTO.getPhoneNumber() , employeeDTO.getDateOfBirth(),
+                employeeDTO.getAddress(), employeeDTO.getPosition(), employeeDTO.getHireDate(), employeeDTO.getSalary(), employeeDTO.getChildrenCount(),
+                    employeeDTO.getSocialSecurityNumber()
+            );
         } catch (Exception e) {
+            System.out.println(employee.toString());
             throw new RuntimeException("Error mapping EmployeeDTO to Employee", e);
         }
     }
-
     public static EmployeeDTO EmployeeToDto(Employee employee) {
+        EmployeeDTO employeeDTO = null;
         try {
-            EmployeeDTO employeeDTO = new EmployeeDTO();
-            employeeDTO.setId(employee.getId());
-            employeeDTO.setUserName(employee.getUserName());
-            employeeDTO.setEmail(employee.getEmail());
-            employeeDTO.setPhoneNumber(employee.getPhone());
-            employeeDTO.setDateOfBirth(employee.getDateOfBirth());
-            employeeDTO.setAddress(employee.getAddress());
-            employeeDTO.setPosition(employee.getPosition());
-            employeeDTO.setHireDate(employee.getHireDate());
-            employeeDTO.setSalary(employee.getSalary());
-            employeeDTO.setChildrenCount(employee.getChildrenCount());
-            employeeDTO.setSocialSecurityNumber(employee.getSocialSecurityNumber());
+             employeeDTO = new EmployeeDTO(
+                    employee.getId() , employee.getUserName() , employee.getEmail(),
+                    employee.getAddress() , employee.getPosition() , employee.getHireDate(),
+                    employee.getSalary() ,employee.getChildrenCount(),employee.getSocialSecurityNumber(),
+                    employee.getPhone(),employee.getDateOfBirth()
+            );
             return employeeDTO;
         } catch (Exception e) {
+            System.out.println(employeeDTO.toString());
             throw new RuntimeException("Error mapping Employee to EmployeeDTO", e);
         }
+    }
+    public static List<EmployeeDTO> EmployeeListToEmployeeDTOList(List<Employee> employees) {
+        List<EmployeeDTO> employeeDTOList = new ArrayList<>();
+        for (Employee employee : employees) {
+            EmployeeDTO employeeDTO = EmployeeToDto(employee);
+            employeeDTOList.add(employeeDTO);
+        }
+        return employeeDTOList;
     }
 }

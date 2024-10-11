@@ -5,11 +5,14 @@ import workforcemanger.workforce.entity.Employee;
 
 import javax.persistence.EntityManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class EmployeeRepositoryImpl implements EmployeeRepository {
-    EntityManager em = JpaEntityManagerFactory.getEntityManager();
     @Override
     public <T> T create(T t) {
+        EntityManager em = JpaEntityManagerFactory.getEntityManager();
         if (t instanceof Employee) {
             try {
                 em.getTransaction().begin();
@@ -29,6 +32,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 
     @Override
     public boolean delete(int id) {
+        EntityManager em = JpaEntityManagerFactory.getEntityManager();
       try {
           em.getTransaction().begin();
           Employee employee = em.find(Employee.class, id);
@@ -46,6 +50,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 
     @Override
     public <T> T update(T t) {
+        EntityManager em = JpaEntityManagerFactory.getEntityManager();
         if (t instanceof Employee) {
             try {
                 em.getTransaction().begin();
@@ -71,4 +76,24 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     public <T> T get(T t) {
         return null;
     }
+
+    @Override
+    public List<Employee> findAll() {
+        EntityManager em = JpaEntityManagerFactory.getEntityManager();
+        List<Employee> employees = new ArrayList<>();
+        try {
+            em.getTransaction().begin();
+            employees = em.createQuery("SELECT e FROM Employee e", Employee.class).getResultList();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+        } finally {
+            em.close();
+        }
+        return employees;
+    }
+
 }
