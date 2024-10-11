@@ -78,10 +78,10 @@ public class UserServlet extends HttpServlet {
                 String targetPage;
                 switch (loggedInUser.getRole()) {
                     case "candidate":
-                        targetPage = "/views/candidate.jsp";
+                        targetPage = "/views/candidate/candidate.jsp";
                         break;
                     case "admin":
-                        targetPage = "/views/admin.jsp?action=";
+                        targetPage = "/views/admin/admin.jsp?action=";
                         break;
                     default:
                         targetPage = "/views/login.jsp";
@@ -91,7 +91,7 @@ public class UserServlet extends HttpServlet {
                 rd.forward(req, resp);
             } else {
                 req.setAttribute("loginError", "Invalid email or password.");
-                RequestDispatcher rd = req.getRequestDispatcher("/views/login.jsp");
+                RequestDispatcher rd = req.getRequestDispatcher("/views/Auth/login.jsp");
                 rd.forward(req, resp);
             }
         } catch (Exception e) {
@@ -105,7 +105,7 @@ public class UserServlet extends HttpServlet {
         try {
             List<EmployeeDTO> employeeDTOS = employeeService.getAllEmployees();
             req.setAttribute("employeeDTOS", employeeDTOS);
-            RequestDispatcher rd = req.getRequestDispatcher("/views/adminEmployeManagement.jsp");
+            RequestDispatcher rd = req.getRequestDispatcher("/views/admin/adminEmployeManagement.jsp");
             rd.forward(req, res);
         } catch (Exception e) {
             throw new RuntimeException(e);

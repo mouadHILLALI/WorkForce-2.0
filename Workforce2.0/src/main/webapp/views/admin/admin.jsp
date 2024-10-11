@@ -16,7 +16,7 @@
 <nav class="navbar">
     <div class="logo">Admin Dashboard</div>
     <ul class="nav-links">
-        <li><a href="/views/admin.jsp">Home</a></li>
+        <li><a href="/views/admin/admin.jsp">Home</a></li>
         <li><a href="/user?action=getAll">Manage Employees</a></li>
         <li><a href="/user?action=logout">Logout</a></li>
     </ul>

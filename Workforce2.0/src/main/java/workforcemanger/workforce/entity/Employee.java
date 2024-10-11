@@ -1,5 +1,7 @@
 package workforcemanger.workforce.entity;
 
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 

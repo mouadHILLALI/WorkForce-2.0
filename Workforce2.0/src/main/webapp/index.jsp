@@ -14,7 +14,7 @@
     <a href="#">About</a>
     <a href="#">Services</a>
     <a href="#">Contact</a>
-    <a href="views/register.jsp" class="signin-btn">Sign In</a>
+    <a href="views/Auth/register.jsp" class="signin-btn">Sign In</a>
 </div>
 
 

@@ -1,5 +1,6 @@
 package workforcemanger.workforce.controller;
 
+import workforcemanger.workforce.cache.Cache;
 import workforcemanger.workforce.dto.EmployeeDTO;
 import workforcemanger.workforce.service.EmployeeService.EmployeeServices;
 
@@ -17,7 +18,14 @@ public class EmployeeServlet extends HttpServlet {
     final EmployeeServices employeeServices = new EmployeeServices();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        String action = req.getParameter("action");
+        switch (action) {
+            case "update":
+                getEmployee(req, resp);
+                break;
+            case "delete":
+                break;
+        }
     }
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     String action = req.getParameter("action");
@@ -26,6 +34,7 @@ public class EmployeeServlet extends HttpServlet {
             create(req,resp);
             break;
         case "update":
+            update(req,resp);
             break;
     }
     }
@@ -51,4 +60,42 @@ public class EmployeeServlet extends HttpServlet {
             throw new RuntimeException(e);
         }
     }
+    public void getEmployee(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        try {
+            int id = Integer.parseInt(req.getParameter("id"));
+            EmployeeDTO employeeDTO = Cache.getFromCache(id);
+            resp.setContentType("text/html");
+            req.setAttribute("employee", employeeDTO);
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/views/admin/updateEmployee.jsp");
+            dispatcher.forward(req, resp);
+        }catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void update(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        try {
+            int id = Integer.parseInt(req.getParameter("id"));
+            String userName = req.getParameter("userName");
+            String email = req.getParameter("email");
+            String address = req.getParameter("address");
+            String position = req.getParameter("position");
+            LocalDate hireDate = LocalDate.parse(req.getParameter("hireDate"));
+            Double salary = Double.parseDouble(req.getParameter("salary"));
+            int childrenCount = Integer.parseInt(req.getParameter("childrenCount"));
+            String socialSecurityNumber = req.getParameter("socialSecurityNumber");
+            String phoneNumber = req.getParameter("phoneNumber");
+            LocalDate dateOfBirth = LocalDate.parse(req.getParameter("dateOfBirth"));
+            EmployeeDTO employeeDTO = new EmployeeDTO(
+                    id, userName, email, address, position,
+                    hireDate, salary, childrenCount, socialSecurityNumber, phoneNumber, dateOfBirth
+            );
+            employeeDTO = employeeServices.update(employeeDTO);
+            req.getSession().setAttribute("employee", employeeDTO);
+            RequestDispatcher rq = req.getRequestDispatcher("/views/admin/adminEmployeeManagement.jsp");
+            rq.forward(req, resp);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

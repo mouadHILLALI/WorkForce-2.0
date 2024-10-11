@@ -35,7 +35,7 @@
         </div>
     </form>
     <div class="register-link">
-        <p>Don't have an account? <a href="/views/register.jsp">Sign Up</a></p>
+        <p>Don't have an account? <a href="/views/Auth/register.jspr.jsp">Sign Up</a></p>
     </div>
 </div>
 </body>
