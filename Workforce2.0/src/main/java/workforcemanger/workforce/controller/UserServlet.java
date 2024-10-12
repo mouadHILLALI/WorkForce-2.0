@@ -33,13 +33,23 @@ public class UserServlet extends HttpServlet {
     }
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
+        String role = req.getParameter("userType");
+        System.out.println(role);
         switch (action){
             case "register":
                 create(req, resp);
                 break;
             case "login":
+                if (role.equals("employee")) {
+                    employeeLogin(req, resp);
+                    break;
+                }else if (role.equals("nonEmployee")) {
                 login(req, resp);
-                break;
+                    break;
+                }else{
+                    logout(req, resp);
+                    break;
+                }
         }
     }
     public void create(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -68,12 +78,13 @@ public class UserServlet extends HttpServlet {
     }
     public void login(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
+            String password = req.getParameter("password");
+            String email = req.getParameter("email");
             UserDTO user = new UserDTO();
-            user.setEmail(req.getParameter("email"));
-            user.setPassword(req.getParameter("password"));
+            user.setEmail(email);
+            user.setPassword(password);
             UserDTO loggedInUser = userService.login(user);
             if (loggedInUser != null) {
-                System.out.println("role: " + loggedInUser.getRole());
                 req.getSession().setAttribute("user", loggedInUser);
                 String targetPage;
                 switch (loggedInUser.getRole()) {
@@ -99,6 +110,24 @@ public class UserServlet extends HttpServlet {
             req.setAttribute("errorMessage", "An error occurred during login. Please try again.");
             RequestDispatcher rd = req.getRequestDispatcher("/views/login.jsp");
             rd.forward(req, resp);
+        }
+    }
+    public void employeeLogin(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        try {
+            String password = req.getParameter("password");
+            String email = req.getParameter("email");
+            EmployeeDTO employeeDTO = employeeService.employeeLogin(email, password);
+            if (employeeDTO != null) {
+                req.getSession().setAttribute("employee", employeeDTO);
+                RequestDispatcher rd = req.getRequestDispatcher("/views/employee/employee.jsp");
+                rd.forward(req, resp);
+            }else{
+                req.setAttribute("loginError", "Invalid email or password.");
+                RequestDispatcher rd = req.getRequestDispatcher("/views/Auth/login.jsp");
+                rd.forward(req, resp);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
     public void getAllInfo(HttpServletRequest req , HttpServletResponse res) throws ServletException , IOException {

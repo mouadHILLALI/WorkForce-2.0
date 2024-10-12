@@ -12,23 +12,44 @@ public class LeaveRequest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int leaveRequestId;
-
+    @Column(name="startDate")
     private LocalDate startDate;
+    @Column(name="endDate")
     private LocalDate endDate;
-
+    @Column(name="reason")
     private String leaveReason;
-
-    @Enumerated(EnumType.STRING)
-    private StatusEnum status;
-
+    @Column(name="status")
+    private String status;
+    @Column(name="docs")
     private String supportingDocs;
+    @Column(name="balance")
     private int leaveBalance;
-
+    @Column(name="type")
+    private String type ;
     @Column(name = "employee_id")
     private int employeeId;
-
-    public LeaveRequest() {}
-
+    public LeaveRequest(){}
+    public LeaveRequest(int leaveRequestId, LocalDate startDate , LocalDate endDate , String leaveReason, String status, String supportingDocs, int leaveBalance, String type, int employeeId) {
+        this.leaveRequestId = leaveRequestId;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.leaveReason = leaveReason;
+        this.status = status;
+        this.supportingDocs = supportingDocs;
+        this.leaveBalance = leaveBalance;
+        this.type = type;
+        this.employeeId = employeeId;
+    }
+    public LeaveRequest( LocalDate startDate , LocalDate endDate , String leaveReason, String status, String supportingDocs, int leaveBalance, String type, int employeeId) {
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.leaveReason = leaveReason;
+        this.status = status;
+        this.supportingDocs = supportingDocs;
+        this.leaveBalance = leaveBalance;
+        this.type = type;
+        this.employeeId = employeeId;
+    }
 
     public int getLeaveRequestId() {
         return leaveRequestId;
@@ -54,10 +75,10 @@ public class LeaveRequest {
     public void setLeaveReason(String leaveReason) {
         this.leaveReason = leaveReason;
     }
-    public StatusEnum getStatus() {
+    public String getStatus() {
         return status;
     }
-    public void setStatus(StatusEnum status) {
+    public void setStatus(String status) {
         this.status = status;
     }
     public String getSupportingDocs() {
@@ -77,5 +98,11 @@ public class LeaveRequest {
     }
     public void setEmployeeId(int employeeId) {
         this.employeeId = employeeId;
+    }
+    public String getType() {
+        return type;
+    }
+    public void setType(String type) {
+        this.type = type;
     }
 }

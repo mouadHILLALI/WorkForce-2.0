@@ -21,11 +21,18 @@
         <div class="form-group">
             <label for="email">Email</label>
             <input type="email" id="email" name="email" required>
-            <input type="text" id="action" name="action" value="login">
+            <input type="hidden" id="action" name="action" value="login">
         </div>
         <div class="form-group">
             <label for="password">Password</label>
             <input type="password" id="password" name="password" required>
+        </div>
+        <div class="form-group">
+            <label for="userType">Are you an employee?</label>
+            <select id="userType" name="userType" required>
+                <option value="employee">Employee</option>
+                <option value="nonEmployee">Non-Employee</option>
+            </select>
         </div>
         <button type="submit" class="login-button">Log In</button>
         <div class="error-message">

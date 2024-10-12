@@ -17,7 +17,7 @@ public class EmployeeDTOMapper {
                     employeeDTO.getId(),
                 employeeDTO.getUserName() , employeeDTO.getEmail() , "employee" , employeeDTO.getPhoneNumber() , employeeDTO.getDateOfBirth(),
                 employeeDTO.getAddress(), employeeDTO.getPosition(), employeeDTO.getHireDate(), employeeDTO.getSalary(), employeeDTO.getChildrenCount(),
-                    employeeDTO.getSocialSecurityNumber()
+                    employeeDTO.getSocialSecurityNumber() , employeeDTO.getPassword()
             );
         } catch (Exception e) {
             System.out.println(employee.toString());
@@ -31,7 +31,7 @@ public class EmployeeDTOMapper {
                     employee.getId() , employee.getUserName() , employee.getEmail(),
                     employee.getAddress() , employee.getPosition() , employee.getHireDate(),
                     employee.getSalary() ,employee.getChildrenCount(),employee.getSocialSecurityNumber(),
-                    employee.getPhone(),employee.getDateOfBirth()
+                    employee.getPhone(),employee.getDateOfBirth() , employee.getPassword()
             );
             return employeeDTO;
         } catch (Exception e) {

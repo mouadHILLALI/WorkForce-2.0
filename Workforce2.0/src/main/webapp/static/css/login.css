@@ -1,9 +1,11 @@
+/* Reset */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
+/* Body Styling */
 body {
     font-family: 'Roboto', sans-serif;
     background-color: #f3f4f6;
@@ -12,9 +14,13 @@ body {
     align-items: center;
     height: 100vh;
 }
-#action{
+
+/* Hidden Action Field */
+#action {
     display: none;
 }
+
+/* Login Container */
 .login-container {
     background: white;
     padding: 30px;
@@ -25,20 +31,24 @@ body {
     transition: transform 0.3s;
 }
 
+/* Hover Effect */
 .login-container:hover {
     transform: scale(1.02);
 }
 
+/* Heading */
 h2 {
     margin-bottom: 20px;
     color: #333;
 }
 
+/* Form Group */
 .form-group {
     margin-bottom: 20px;
     text-align: left;
 }
 
+/* Label */
 label {
     display: block;
     margin-bottom: 5px;
@@ -46,52 +56,69 @@ label {
     font-weight: 700;
 }
 
-input[type="email"],
-input[type="password"] {
+/* Input and Select Fields */
+.form-group input,
+.form-group select {
     width: 100%;
-    padding: 12px 15px;
+    padding: 0.75rem;
     border: 1px solid #ddd;
-    border-radius: 6px;
-    font-size: 16px;
-    transition: border-color 0.3s;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #333;
+    background-color: #f9f9f9;
 }
 
-input[type="email"]:focus,
-input[type="password"]:focus {
-    border-color: #007bff;
+/* Focus State for Input and Select */
+.form-group input:focus,
+.form-group select:focus {
     outline: none;
+    border-color: #007BFF;
+    background-color: #fff;
 }
 
+/* Login Button */
 .login-button {
-    background-color: #007bff;
-    color: white;
-    padding: 12px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
     width: 100%;
+    padding: 0.75rem;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
     font-size: 16px;
-    transition: background-color 0.3s, transform 0.2s;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .login-button:hover {
     background-color: #0056b3;
-    transform: translateY(-2px);
 }
 
+/* Error Message Styling */
 .error-message {
-    color: red;
-    margin-top: 10px;
-}
-
-.register-link {
-    margin-top: 15px;
+    margin-top: 1rem;
+    color: #ff4d4d;
     font-size: 14px;
 }
 
+.error-message p {
+    margin: 0;
+}
+
+/* Register Link */
+.register-link {
+    margin-top: 1.5rem;
+}
+
+.register-link p {
+    font-size: 14px;
+    color: #555;
+}
+
 .register-link a {
-    color: #007bff;
+    color: #007BFF;
     text-decoration: none;
+    font-weight: 500;
 }
 
 .register-link a:hover {

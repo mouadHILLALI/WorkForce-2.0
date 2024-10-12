@@ -9,15 +9,15 @@ public class LeaveRequestDTO {
     private LocalDate startDate;
     private LocalDate endDate;
     private String leaveReason;
-    private StatusEnum status;
+    private String status;
     private String supportingDocs;
     private int leaveBalance;
     private int employeeId;
-
+    private String type;
 
     public LeaveRequestDTO() {}
 
-    public LeaveRequestDTO(int leaveRequestId, LocalDate startDate, LocalDate endDate, String leaveReason, StatusEnum status, String supportingDocs, int leaveBalance, int employeeId) {
+    public LeaveRequestDTO(int leaveRequestId, LocalDate startDate, LocalDate endDate, String leaveReason, String status, String supportingDocs, int leaveBalance, int employeeId , String type) {
         this.leaveRequestId = leaveRequestId;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -26,6 +26,17 @@ public class LeaveRequestDTO {
         this.supportingDocs = supportingDocs;
         this.leaveBalance = leaveBalance;
         this.employeeId = employeeId;
+        this.type = type;
+    }
+    public LeaveRequestDTO( LocalDate startDate, LocalDate endDate, String leaveReason, String status, String supportingDocs, int leaveBalance, int employeeId , String type ) {
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.leaveReason = leaveReason;
+        this.status = status;
+        this.supportingDocs = supportingDocs;
+        this.leaveBalance = leaveBalance;
+        this.employeeId = employeeId;
+        this.type = type;
     }
 
     public int getLeaveRequestId() {
@@ -60,11 +71,11 @@ public class LeaveRequestDTO {
         this.leaveReason = leaveReason;
     }
 
-    public StatusEnum getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(StatusEnum status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
@@ -90,6 +101,12 @@ public class LeaveRequestDTO {
 
     public void setEmployeeId(int employeeId) {
         this.employeeId = employeeId;
+    }
+    public String getType() {
+        return type;
+    }
+    public void setType(String type) {
+        this.type = type;
     }
 
     @Override

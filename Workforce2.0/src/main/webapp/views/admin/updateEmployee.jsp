@@ -30,6 +30,10 @@
             <input type="email" id="email" name="email" value="${employee.email}" required>
         </div>
         <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" value="${employee.password}" required>
+        </div>
+        <div class="form-group">
             <label for="address">Address:</label>
             <input type="text" id="address" name="address" value="${employee.address}" required>
         </div>

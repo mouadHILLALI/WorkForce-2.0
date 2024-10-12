@@ -44,9 +44,10 @@ public class Employee {
 
     @Column(name = "social_security_number")
     private String socialSecurityNumber;
-
+    @Column(name = "password")
+    private String password;
     public Employee() {}
-    public Employee( int id , String userName , String email , String role , String phone , LocalDate dateOfBirth , String address , String position , LocalDate hireDate , Double salary , int childrenCount , String socialSecurityNumber) {
+    public Employee( int id , String userName , String email , String role , String phone , LocalDate dateOfBirth , String address , String position , LocalDate hireDate , Double salary , int childrenCount , String socialSecurityNumber , String password ) {
         this.id = id;
         this.userName = userName;
         this.email = email;
@@ -59,8 +60,9 @@ public class Employee {
         this.salary = salary;
         this.childrenCount = childrenCount;
         this.socialSecurityNumber = socialSecurityNumber;
+        this.password = password;
     }
-    public Employee(String userName , String email , String role , String phone , LocalDate dateOfBirth , String address , String position , LocalDate hireDate , Double salary , int childrenCount , String socialSecurityNumber) {
+    public Employee(String userName , String email , String role , String phone , LocalDate dateOfBirth , String address , String position , LocalDate hireDate , Double salary , int childrenCount , String socialSecurityNumber , String password ) {
         this.userName = userName;
         this.email = email;
         this.role = "employee";
@@ -72,6 +74,7 @@ public class Employee {
         this.salary = salary;
         this.childrenCount = childrenCount;
         this.socialSecurityNumber = socialSecurityNumber;
+        this.password = password;
     }
     public int getId() {
         return id;
@@ -167,6 +170,12 @@ public class Employee {
 
     public void setSocialSecurityNumber(String socialSecurityNumber) {
         this.socialSecurityNumber = socialSecurityNumber;
+    }
+    public String getPassword() {
+        return password;
+    }
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override

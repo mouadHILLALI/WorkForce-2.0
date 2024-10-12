@@ -85,10 +85,11 @@ public class EmployeeServlet extends HttpServlet {
             int childrenCount = Integer.parseInt(req.getParameter("childrenCount"));
             String socialSecurityNumber = req.getParameter("socialSecurityNumber");
             String phoneNumber = req.getParameter("phone");
+            String password = req.getParameter("password");
             LocalDate dateOfBirth = LocalDate.parse(req.getParameter("birthDate"));
             EmployeeDTO employeeDTO = new EmployeeDTO(
                     id, userName, email, address, position,
-                    hireDate, salary, childrenCount, socialSecurityNumber, phoneNumber, dateOfBirth
+                    hireDate, salary, childrenCount, socialSecurityNumber, phoneNumber, dateOfBirth , password
             );
             employeeDTO = employeeServices.update(employeeDTO);
             req.getSession().setAttribute("employee", employeeDTO);

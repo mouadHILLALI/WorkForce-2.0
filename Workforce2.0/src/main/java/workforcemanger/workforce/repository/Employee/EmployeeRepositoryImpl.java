@@ -2,8 +2,10 @@ package workforcemanger.workforce.repository.Employee;
 
 import workforcemanger.workforce.configuration.JpaEntityManagerFactory;
 import workforcemanger.workforce.entity.Employee;
+import workforcemanger.workforce.entity.User;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -94,6 +96,35 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
             em.close();
         }
         return employees;
+    }
+
+    @Override
+    public Employee login(String email, String password) {
+        EntityManager em = JpaEntityManagerFactory.getEntityManager();
+        Employee foundEmployee = null;
+        try {
+            em.getTransaction().begin();
+            TypedQuery<Employee> query = em.createQuery("SELECT u FROM Employee u WHERE u.email = :email", Employee.class);
+            query.setParameter("email", email);
+            foundEmployee = query.getSingleResult();
+            if (foundEmployee != null && foundEmployee.getPassword().equals(password)) {
+                em.getTransaction().commit();
+                return foundEmployee;
+            } else {
+                em.getTransaction().rollback();
+                return null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            return null;
+        } finally {
+            if (em.isOpen()) {
+                em.close();
+            }
+        }
     }
 
 }

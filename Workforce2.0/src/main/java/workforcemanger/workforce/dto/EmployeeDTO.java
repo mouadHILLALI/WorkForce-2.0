@@ -15,10 +15,11 @@ public class EmployeeDTO {
     private String socialSecurityNumber;
     private String phoneNumber;
     private LocalDate dateOfBirth;
+    private String password;
     public EmployeeDTO() {}
 
     public EmployeeDTO(int id, String userName, String email, String address, String position,
-                       LocalDate hireDate, Double salary, int childrenCount, String socialSecurityNumber, String phoneNumber, LocalDate dateOfBirth) {
+                       LocalDate hireDate, Double salary, int childrenCount, String socialSecurityNumber, String phoneNumber, LocalDate dateOfBirth , String password) {
         this.id = id;
         this.userName = userName;
         this.email = email;
@@ -30,9 +31,10 @@ public class EmployeeDTO {
         this.socialSecurityNumber = socialSecurityNumber;
         this.phoneNumber = phoneNumber;
         this.dateOfBirth = dateOfBirth;
+        this.password = password;
     }
     public EmployeeDTO( String userName, String email, String address, String position,
-                       LocalDate hireDate, Double salary, int childrenCount, String socialSecurityNumber, String phoneNumber , LocalDate dateOfBirth) {
+                       LocalDate hireDate, Double salary, int childrenCount, String socialSecurityNumber, String phoneNumber , LocalDate dateOfBirth , String password ) {
         this.userName = userName;
         this.email = email;
         this.address = address;
@@ -43,6 +45,7 @@ public class EmployeeDTO {
         this.socialSecurityNumber = socialSecurityNumber;
         this.phoneNumber = phoneNumber;
         this.dateOfBirth = dateOfBirth;
+        this.password = password;
     }
 
     public int getId() {
@@ -126,7 +129,12 @@ public class EmployeeDTO {
     public void setSocialSecurityNumber(String socialSecurityNumber) {
         this.socialSecurityNumber = socialSecurityNumber;
     }
-
+    public String getPassword() {
+        return password;
+    }
+    public void setPassword(String password) {
+        this.password = password;
+    }
     @Override
     public String toString() {
         return "EmployeeDTO{" +
