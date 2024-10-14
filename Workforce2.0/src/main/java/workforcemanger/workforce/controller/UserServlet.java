@@ -2,6 +2,7 @@ package workforcemanger.workforce.controller;
 
 import workforcemanger.workforce.dto.EmployeeDTO;
 import workforcemanger.workforce.dto.UserDTO;
+import workforcemanger.workforce.maas.MaasAuthetificationImpl;
 import workforcemanger.workforce.service.EmployeeService.EmployeeServices;
 import workforcemanger.workforce.service.UserService.UserService;
 
@@ -77,41 +78,44 @@ public class UserServlet extends HttpServlet {
         }
     }
     public void login(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        try {
-            String password = req.getParameter("password");
-            String email = req.getParameter("email");
-            UserDTO user = new UserDTO();
-            user.setEmail(email);
-            user.setPassword(password);
-            UserDTO loggedInUser = userService.login(user);
-            if (loggedInUser != null) {
-                req.getSession().setAttribute("user", loggedInUser);
-                String targetPage;
-                switch (loggedInUser.getRole()) {
-                    case "candidate":
-                        targetPage = "/views/candidate/candidate.jsp";
-                        break;
-                    case "admin":
-                        targetPage = "/views/admin/admin.jsp?action=";
-                        break;
-                    default:
-                        targetPage = "/views/login.jsp";
-                        break;
-                }
-                RequestDispatcher rd = req.getRequestDispatcher(targetPage);
-                rd.forward(req, resp);
-            } else {
-                req.setAttribute("loginError", "Invalid email or password.");
-                RequestDispatcher rd = req.getRequestDispatcher("/views/Auth/login.jsp");
-                rd.forward(req, resp);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            req.setAttribute("errorMessage", "An error occurred during login. Please try again.");
-            RequestDispatcher rd = req.getRequestDispatcher("/views/login.jsp");
-            rd.forward(req, resp);
-        }
+//        try {
+//
+//            if (loggedInUser != null) {
+//                req.getSession().setAttribute("user", loggedInUser);
+//                String targetPage;
+//                switch (loggedInUser.getRole()) {
+//                    case "candidate":
+//                        targetPage = "/views/candidate/candidate.jsp";
+//                        break;
+//                    case "admin":
+//                        targetPage = "/views/admin/admin.jsp?action=";
+//                        break;
+//                    default:
+//                        targetPage = "/views/login.jsp";
+//                        break;
+//                }
+//                RequestDispatcher rd = req.getRequestDispatcher(targetPage);
+//                rd.forward(req, resp);
+
+//            } else {
+//                req.setAttribute("loginError", "Invalid email or password.");
+//                RequestDispatcher rd = req.getRequestDispatcher("/views/Auth/login.jsp");
+//                rd.forward(req, resp);
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            req.setAttribute("errorMessage", "An error occurred during login. Please try again.");
+//            RequestDispatcher rd = req.getRequestDispatcher("/views/login.jsp");
+//            rd.forward(req, resp);
+//        }
+        String password = req.getParameter("password");
+        String email = req.getParameter("email");
+        UserDTO user = new UserDTO();
+        user.setEmail(email);
+        user.setPassword(password);
+        UserDTO loggedInUser = userService.login(user);
     }
+
     public void employeeLogin(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             String password = req.getParameter("password");

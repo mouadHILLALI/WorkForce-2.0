@@ -2,6 +2,8 @@ package workforcemanger.workforce.service.EmployeeService;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 import workforcemanger.workforce.dto.EmployeeDTO;
 
 import java.time.LocalDate;
@@ -10,9 +12,10 @@ import static org.junit.jupiter.api.Assertions.*;
 class EmployeeServicesTest {
 
     private EmployeeServices employeeServices;
+    Mockito mockito = new Mockito();
     @BeforeEach
     void setUp() {
-        employeeServices = new EmployeeServices();
+        employeeServices = mockito.mock(EmployeeServices.class);
     }
     @Test
     void updateEmployee() {
