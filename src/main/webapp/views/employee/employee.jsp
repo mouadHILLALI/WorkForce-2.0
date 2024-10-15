@@ -16,7 +16,7 @@
 <body>
 <nav class="navbar">
     <div class="navbar-brand">
-        <h1>Welcome, ${employee.userName}</h1>
+        <h1>Welcome, ${user.userName}</h1>
     </div>
     <ul class="navbar-links">
         <li><a href="#">Dashboard</a></li>
@@ -53,6 +53,7 @@
         <div class="form-group">
             <label for="file">Reason for Leave:</label>
             <input type="file" id="file" name="file"  required>
+            <input type="text" id="f" value="${user.id}"  name="id"  style="display: none">
         </div>
         <button type="submit" class="submit-button">Submit Application</button>
     </form>
