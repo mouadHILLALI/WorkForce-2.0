@@ -76,7 +76,6 @@ public class UserServlet extends HttpServlet {
             String password = req.getParameter("password");
             String email = req.getParameter("email");
             String role = req.getParameter("userType");
-
             Object loggedInUser = null;
 
             if (role.equals("employee")) {
@@ -120,6 +119,9 @@ public class UserServlet extends HttpServlet {
                     break;
                 case "admin":
                     target = "/views/admin/admin.jsp";
+                    break;
+                case "hr":
+                    target = "/views/hr/hr.jsp";
                     break;
                 default:
                     throw new IllegalArgumentException("Invalid role: " + role);
