@@ -4,6 +4,8 @@ import workforcemanger.workforce.enums.StatusEnum;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "job_offers")
@@ -19,8 +21,10 @@ public class JobOffer {
     private int salary;
     private String status;
     private LocalDate validityDate;
+    @Column(name = "hrid")
     private int hrID;
-
+    @OneToMany(mappedBy = "jobOffer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<JobOfferCandidate> candidates = new ArrayList<>();
     public JobOffer() {}
     public JobOffer(String title,String description , String requirements , LocalDate datePosted, int salary, String status, LocalDate validityDate, int hrID) {
         this.title = title;

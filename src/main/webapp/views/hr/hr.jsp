@@ -14,27 +14,28 @@
 <body>
 <nav class="navbar">
     <ul>
-        <li><a href="/home.jsp">Home</a></li>
-        <li><a href="/jobOffers.jsp">Job Offers</a></li>
+        <li><a href="/views/hr/hr.jsp">Home</a></li>
+        <li><a href="/offer?action=getAll&id=${user.id}">Job Offers</a></li>
         <li><a href="/user?action=logout">Logout</a></li>
     </ul>
 </nav>
+<h1>${message}</h1>
 <div class="container">
     <h1>HR - Add Job Offer</h1>
     <form action="/offer" method="post">
-        <label for="Title">Job Title:</label>
-        <input type="text" id="Title" name="Title" required>
-        <input type="text" id="id" name="id" style="display: none" required>
-        <input type="text" id="" name="action" value="create" style="display: none" required>
-        <label for="Description">Job Description:</label>
-        <textarea type="text" row="4" id="Description" name="Description" required></textarea>
-        <label for="Requirements">Job Requirements:</label>
-        <textarea id="Requirements" name="Requirements" required></textarea>
-        <label for="salary">Salary:</label>
-        <input type="number" id="salary" name="salary" required>
-        <label for="validityDate">Validity Date:</label>
-        <input type="date" id="validityDate" name="validityDate" required>
-        <button type="submit">Submit</button>
+        <label >Job Title:</label>
+        <input type="text"  name="Title" required>
+        <input type="text" value="${user.id}" name="id" style="display: none" required>
+        <input type="text" name="action" value="create" style="display: none" required>
+        <label >Job Description:</label>
+        <textarea type="text" row="4"  name="Description" required></textarea>
+        <label >Job Requirements:</label>
+        <textarea  name="Requirements" required></textarea>
+        <label >Salary:</label>
+        <input type="number"  name="salary" required>
+        <label >Validity Date:</label>
+        <input type="date"  name="validityDate" required>
+        <button>add</button>
     </form>
 </div>
 </body>

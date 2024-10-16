@@ -84,12 +84,17 @@ public class UserServlet extends HttpServlet {
                 employee.setPassword(password);
                 employee = userService.login(employee);
                 reroute(req , resp , employee , "employee" );
-            } else {
+            } else if (role.equals("other")) {
                 UserDTO user = new UserDTO();
                 user.setEmail(email);
                 user.setPassword(password);
                 user = userService.login(user);
+                if (user!=null) {
                 reroute(req , resp , user , user.getRole());
+                }else{
+                    RequestDispatcher rd = req.getRequestDispatcher("/views/Auth/login.jsp");
+                    rd.forward(req, resp);
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -126,7 +131,7 @@ public class UserServlet extends HttpServlet {
                 default:
                     throw new IllegalArgumentException("Invalid role: " + role);
             }
-            req.setAttribute("user", obj);
+            req.getSession().setAttribute("user", obj);
             RequestDispatcher rd = req.getRequestDispatcher(target);
             rd.forward(req, response);
         } catch (Exception e) {

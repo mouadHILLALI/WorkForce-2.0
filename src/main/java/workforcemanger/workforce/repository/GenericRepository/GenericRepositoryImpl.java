@@ -4,6 +4,7 @@ import workforcemanger.workforce.configuration.JpaEntityManagerFactory;
 import workforcemanger.workforce.repository.Repository;
 
 import javax.persistence.EntityManager;
+import java.util.List;
 
 public class GenericRepositoryImpl implements Repository {
     private JpaEntityManagerFactory emf;
@@ -58,4 +59,27 @@ public class GenericRepositoryImpl implements Repository {
     public <T> T get(T t) {
         return null;
     }
+    public <T> List<T> findAll(Class<T> clazz, int hrId){
+        EntityManager em = emf.getEntityManager();
+        List<T> resultList = null;
+        try {
+            em.getTransaction().begin();
+            resultList = em.createQuery("SELECT u FROM " + clazz.getSimpleName() + " u WHERE u.hrID = :hrid", clazz)
+                    .setParameter("hrid", hrId)
+                    .getResultList();
+
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+        } finally {
+            if (em.isOpen()) {
+                em.close();
+            }
+        }
+        return resultList;
+    }
+
 }

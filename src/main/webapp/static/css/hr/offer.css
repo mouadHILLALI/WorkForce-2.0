@@ -1,0 +1,120 @@
+/* Resetting margin and padding for all elements */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+/* Navbar Styles */
+.navbar {
+    background-color: #2c3e50; /* Dark Blue */
+    padding: 1em;
+}
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.navbar li {
+    margin: 0 15px;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.navbar a:hover {
+    background-color: #34495e; /* Lighter Blue */
+}
+
+/* Job Offers Container */
+.job-offers-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px;
+    padding: 20px;
+}
+
+/* Job Card Styles */
+.job-card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.job-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.job-card h2 {
+    margin-bottom: 10px;
+    font-size: 1.5em;
+    color: #2980b9; /* Blue */
+}
+
+.job-card p {
+    margin: 5px 0;
+}
+
+/* Button Group Styles */
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.btn {
+    flex: 1; /* Makes buttons equal width */
+    padding: 12px 15px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin: 0 5px; /* Adds space between buttons */
+}
+
+.btn-update {
+    background-color: #3498db; /* Blue */
+}
+
+.btn-update:hover {
+    background-color: #2980b9; /* Darker Blue */
+    transform: translateY(-2px);
+}
+
+.btn-delete {
+    background-color: #e74c3c; /* Red */
+}
+
+.btn-delete:hover {
+    background-color: #c0392b; /* Darker Red */
+    transform: translateY(-2px);
+}
+
+.btn-candidates {
+    background-color: #27ae60; /* Green */
+}
+
+.btn-candidates:hover {
+    background-color: #219150; /* Darker Green */
+    transform: translateY(-2px);
+}

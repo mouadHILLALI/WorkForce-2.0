@@ -36,7 +36,12 @@ public class GenericServiceImpl implements GenericService {
     }
 
     @Override
-    public <T> List<T> findAll(Class<T> clazz) {
+    public <T> List<T> findAllById(Class<T> clazz , int hrID) {
+        try {
+            return repository.findAll(clazz , hrID);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return Collections.emptyList();
     }
 }
