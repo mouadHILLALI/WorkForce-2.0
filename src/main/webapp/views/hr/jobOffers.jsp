@@ -15,7 +15,7 @@
 <body>
 <nav class="navbar">
     <ul>
-        <li><a href="/views/hr/hr.jsp">Home</a></li>
+        <li><a href="/user?action=get&role=hr">Home</a></li>
         <li><a href="/hr">HR</a></li>
         <li><a href="/offer?action=getAll&id=${user.id}">Job Offers</a></li>
     </ul>

@@ -17,7 +17,7 @@ public class GenericRepositoryImpl implements Repository {
             EntityManager em = emf.getEntityManager();
         try {
             em.getTransaction().begin();
-            em.persist(t);
+            em.merge(t);
             em.getTransaction().commit();
             em.close();
             return t;

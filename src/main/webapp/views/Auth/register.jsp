@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Registration Page</title>
-    <link rel="stylesheet" type="text/css" href="/static/css/register.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/Auth/register.css">
 </head>
 <body>
 <div class="navbar">

@@ -20,8 +20,8 @@
     </div>
     <ul class="navbar-links">
         <li><a href="#">Dashboard</a></li>
-        <li><a href="#">Profile</a></li>
-        <li><a href="#">Apply for Leave</a></li>
+        <li><a href="/employee?action=profile">Profile</a></li>
+        <li><a href="#">Leave requests</a></li>
         <li><a href="/user?action=logout">Logout</a></li>
     </ul>
 </nav>

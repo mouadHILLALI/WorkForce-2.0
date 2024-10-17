@@ -10,7 +10,7 @@
 <html>
 <head>
     <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="/static/css/admin.css">
+    <link rel="stylesheet" href="/static/admin/admin.css">
 </head>
 <body>
 <nav class="navbar">

@@ -13,7 +13,7 @@
 <html>
 <head>
     <title>Update Employee</title>
-    <link rel="stylesheet" href="/static/css/adminUpdatePanel.css">
+    <link rel="stylesheet" href="/static/admin/adminUpdatePanel.css">
 </head>
 <body>
 <div class="form-container">

@@ -4,7 +4,7 @@
 <html>
 <head>
     <title>Employee Management</title>
-    <link rel="stylesheet" href="/static/css/adminEmployeeManagement.css">
+    <link rel="stylesheet" href="/static/admin/adminEmployeeManagement.css">
 </head>
 <body>
 <nav class="navbar">
