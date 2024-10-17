@@ -56,9 +56,28 @@ public class GenericRepositoryImpl implements Repository {
     }
 
     @Override
-    public <T> T get(T t) {
-        return null;
+    public <T> T get(Class<T> clazz, int id) {
+        EntityManager em = emf.getEntityManager();
+        T entity = null;
+        try {
+            em.getTransaction().begin();
+            entity = em.find(clazz, id);
+            em.getTransaction().commit();
+            em.close();
+            return entity;
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+        } finally {
+            if (em.isOpen()) {
+                em.close();
+            }
+        }
+        return entity;
     }
+
     public <T> List<T> findAll(Class<T> clazz, int hrId){
         EntityManager em = emf.getEntityManager();
         List<T> resultList = null;
@@ -76,6 +95,24 @@ public class GenericRepositoryImpl implements Repository {
             }
         } finally {
             if (em.isOpen()) {
+                em.close();
+            }
+        }
+        return resultList;
+    }
+    public <T> List<T> findAll(Class<T> clazz){
+        EntityManager em = emf.getEntityManager();
+        List<T> resultList = null;
+        try {
+            em.getTransaction().begin();
+            resultList = em.createQuery("SELECT u FROM " + clazz.getSimpleName() + " u", clazz).getResultList();
+            em.getTransaction().commit();
+            em.close();
+            return resultList;
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
                 em.close();
             }
         }

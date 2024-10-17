@@ -44,4 +44,23 @@ public class GenericServiceImpl implements GenericService {
         }
         return Collections.emptyList();
     }
+
+    @Override
+    public <T> T findById(Class<T> clazz , int id) {
+        try {
+            return repository.get(clazz , id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public <T> List<T> findAll(Class<T> clazz) {
+        try {
+            return repository.findAll(clazz);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Collections.emptyList();
+    }
 }

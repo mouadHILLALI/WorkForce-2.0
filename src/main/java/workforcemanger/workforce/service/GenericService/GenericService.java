@@ -7,4 +7,5 @@ public interface GenericService {
     abstract <T> T update(T t);
     abstract <T> T delete(T t);
     abstract <T> List<T> findAllById(Class<T> clazz , int id);
+    abstract <T> T findById(Class<T> clazz , int id);
 }

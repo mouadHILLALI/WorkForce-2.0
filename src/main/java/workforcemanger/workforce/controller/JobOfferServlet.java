@@ -1,6 +1,8 @@
 package workforcemanger.workforce.controller;
 
 import workforcemanger.workforce.entity.JobOffer;
+import workforcemanger.workforce.entity.JobOfferCandidate;
+import workforcemanger.workforce.entity.JobOfferCandidateId;
 import workforcemanger.workforce.entity.User;
 import workforcemanger.workforce.service.GenericService.GenericServiceImpl;
 
@@ -32,6 +34,9 @@ public class JobOfferServlet extends HttpServlet {
     switch (action) {
         case "create":
             createJobOffer(req, resp);
+            break;
+        case "apply":
+            applyJobOffer(req, resp);
             break;
     }
     }
@@ -72,4 +77,23 @@ public class JobOfferServlet extends HttpServlet {
                 e.printStackTrace();
             }
         }
+    public void applyJobOffer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            int userId = Integer.parseInt(request.getParameter("userId"));
+            int jobOfferId = Integer.parseInt(request.getParameter("jobId"));
+            User user = genericService.findById(User.class, userId);
+            JobOffer jobOffer = genericService.findById(JobOffer.class, jobOfferId);
+            JobOfferCandidate jobOfferCandidate = new JobOfferCandidate(jobOffer, user);
+            genericService.create(jobOfferCandidate);
+            request.setAttribute("message", "Job Offer applied successfully");
+            RequestDispatcher view = request.getRequestDispatcher("/views/candidate/candidate.jsp");
+            view.forward(request, response);
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.setAttribute("errorMessage", "Failed to apply for job offer");
+            RequestDispatcher view = request.getRequestDispatcher("/views/error.jsp");
+            view.forward(request, response);
+        }
+    }
+
 }

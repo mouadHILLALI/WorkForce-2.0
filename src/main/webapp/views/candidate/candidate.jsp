@@ -1,48 +1,38 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: MD
-  Date: 10/10/2024
-  Time: 10:25 AM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title>Candidate Dashboard</title>
-    <link rel="stylesheet" type="text/css" href="/static/css/candidate.css">
+    <title>Job Offers</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/candidate/candidate.css">
 </head>
 <body>
-<div class="container">
-    <header class="header">
-        <h1>Welcome, ${user.userName}!</h1>
-        <a href="/user?action=logout" class="logout">Log Out</a>
-    </header>
 
-    <section class="info-section">
-        <h2>Personal Information</h2>
-        <div class="info-item">
-            <strong>Name:</strong> ${user.userName}
-        </div>
-        <div class="info-item">
-            <strong>Email:</strong> ${user.email}
-        </div>
-        <div class="info-item">
-            <strong>Phone:</strong> ${user.phone}
-        </div>
-    </section>
-
-    <section class="apply-section">
-        <h2>Apply for Jobs</h2>
-        <form action="applyJob.jsp" method="post" enctype="multipart/form-data">
-            <label for="jobPosition">Job Position:</label>
-            <input type="text" id="jobPosition" name="jobPosition" required>
-
-            <label for="resume">Upload Resume:</label>
-            <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx" required>
-
-            <button type="submit" class="apply-button">Apply</button>
-        </form>
-    </section>
+<div class="navbar">
+    <ul>
+        <li><a href="/home">Home</a></li>
+        <li><a href="/profile">Profile</a></li>
+        <li><a href="/jobs">Job Offers</a></li>
+        <li><a href="/user?action=logout">Logout</a></li>
+    </ul>
 </div>
+
+<div class="job-listings">
+    <c:forEach items="${jobs}" var="job">
+        <div class="job-card">
+            <h2>${job.title}</h2>
+            <p><strong>Description:</strong> ${job.description}</p>
+            <p><strong>Requirements:</strong> ${job.requirements}</p>
+            <p><strong>Salary:</strong> ${job.salary}</p>
+            <p><strong>Date Posted:</strong> ${job.datePosted}</p>
+            <form action="/offer" method="post">
+                <input type="hidden" name="jobId" value="${job.id}">
+                <input type="hidden" name="action" value="apply">
+                <input type="hidden" name="userId" value="${user.id}">
+                <button type="submit" class="apply-button">Apply</button>
+            </form>
+        </div>
+    </c:forEach>
+</div>
+
 </body>
 </html>

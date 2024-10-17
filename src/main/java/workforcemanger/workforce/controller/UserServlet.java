@@ -2,8 +2,10 @@ package workforcemanger.workforce.controller;
 
 import workforcemanger.workforce.dto.EmployeeDTO;
 import workforcemanger.workforce.dto.UserDTO;
+import workforcemanger.workforce.entity.JobOffer;
 import workforcemanger.workforce.maas.MaasAuthetificationImpl;
 import workforcemanger.workforce.service.EmployeeService.EmployeeServices;
+import workforcemanger.workforce.service.GenericService.GenericServiceImpl;
 import workforcemanger.workforce.service.UserService.UserService;
 
 import javax.servlet.RequestDispatcher;
@@ -20,6 +22,7 @@ public class UserServlet extends HttpServlet {
     MaasAuthetificationImpl maasAuthetification = new MaasAuthetificationImpl();
     final UserService userService = new UserService(maasAuthetification);
     final EmployeeServices employeeService = new EmployeeServices();
+    final GenericServiceImpl genericService = new GenericServiceImpl();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     String action = req.getParameter("action");
@@ -132,6 +135,10 @@ public class UserServlet extends HttpServlet {
                     throw new IllegalArgumentException("Invalid role: " + role);
             }
             req.getSession().setAttribute("user", obj);
+            if (role.equals("candidate")) {
+                List<JobOffer> jobOffers = genericService.findAll(JobOffer.class);
+                req.setAttribute("jobs", jobOffers);
+            }
             RequestDispatcher rd = req.getRequestDispatcher(target);
             rd.forward(req, response);
         } catch (Exception e) {
